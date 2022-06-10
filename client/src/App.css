@@ -1,0 +1,13 @@
+@import '~antd/dist/antd.css';
+
+.site-layout-content {
+    min-height: calc(100vh - 184px);
+    padding: 24px;
+    background: #fff;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
