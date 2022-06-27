@@ -1,4 +1,4 @@
-import express, { Express } from 'express';
+import express, {Express} from 'express';
 
 const mongoose = require("mongoose");
 const cors = require('cors')
@@ -11,8 +11,7 @@ app.use(cors("*"))
 
 mongoose.connect('mongodb://localhost:27017/crm').catch((error: any) => {console.log(error)} );
 mongoose.Promise = global.Promise;
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 const authRoute = require("./auth/auth.route")
 const userDataRoute = require("./user-data/user-data.route")

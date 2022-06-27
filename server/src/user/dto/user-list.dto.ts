@@ -7,7 +7,6 @@ class UserListDto {
 
     constructor(users: Array<IUser>) {
         users.forEach(user => {
-            console.log(user)
             this.users.push(new UserDto(user))
         })
     }

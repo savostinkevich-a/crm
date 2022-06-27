@@ -2,25 +2,28 @@ import RegisterInput from "./input/register.input";
 import UserModel from "../user/user.models";
 import {hash, compare} from "../_root/utils/bcrypt";
 import AuthDto from "./dto/auth.dto";
-import UserDataActions from "../user-data/user-data.actions";
 import LoginInput from "./input/login.input";
 
 
 const AuthActions = {
     register: async (input: RegisterInput) => {
-        const checkUser = await UserModel.findOne({username: input.username}).exec()
-        if (checkUser) {
+        const checkUserUsername = await UserModel.findOne({username: input.username}).exec()
+        if (checkUserUsername) {
             return {message: `Username ${input.username} is unavailable`}
         }
 
+        const checkUserEmail = await UserModel.findOne({email: input.email}).exec()
+        if (checkUserEmail) {
+            return {message: `User with email ${input.email} is already exists`}
+        }
+
         const hashedPassword = hash(input.password)
-        const user = new UserModel({username: input.username, password: hashedPassword})
-        const saved = await user.save()
-        const data = await UserDataActions.createUserData({user: saved._id})
-        await UserModel.findOneAndUpdate({_id: saved._id}, {data})
+        const user = new UserModel({...input, password: hashedPassword})
+        await user.save()
 
         return new AuthDto(user)
     },
+
     login: async (input: LoginInput) => {
         const user = await UserModel.findOne({username: input.username}).exec()
         if (user) {

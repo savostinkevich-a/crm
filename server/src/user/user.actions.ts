@@ -9,7 +9,7 @@ const UserActions = {
     get: async (token: string, response: Response) => {
         const user = JWTVerify(token)
         if (user)  {
-            const users = await UserModel.find().populate("data")
+            const users = await UserModel.find()
             return new UserListDto(users)
         }
 
@@ -20,7 +20,7 @@ const UserActions = {
         const user = JWTVerify(token)
         if (user) {
             console.log(params)
-            const user = await UserModel.findById(params.id).populate('data')
+            const user = await UserModel.findById(params.id)
             console.log(user)
             return user ? new UserDto(user) : {}
         }

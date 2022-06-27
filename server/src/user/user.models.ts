@@ -4,10 +4,10 @@ import IUser from "../_root/models/IUser";
 const UserSchema = new Schema<IUser>({
     username: {type: String, required: true, unique: true},
     password: {type: String, required: true},
-    data: {
-        type: Schema.Types.ObjectId,
-        ref: "UserData"
-    }
+    email: {type: String, required: true, unique: true},
+    firstName: {type: String},
+    lastName: {type: String},
+    avatar: {type: String},
 })
 
 const UserModel = model("User", UserSchema)
