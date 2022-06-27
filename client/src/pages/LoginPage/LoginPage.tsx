@@ -1,62 +1,21 @@
 import React from 'react';
-import {Button, Checkbox, Form, Input} from "antd";
-import {useAppDispatch} from "../../hooks/useAppDispatch";
-import AuthDto from "../../redux/auth/dto/AuthDto";
-import AuthThunks from "../../redux/auth/thunks";
+import LoginForm from "../../components/LoginForm/LoginForm";
+import {useLocation} from "react-router-dom";
+import RegisterForm from "../../components/RegisterForm/RegisterForm";
 
 const LoginPage = () => {
 
-    const dispatch = useAppDispatch()
-
-
-    const onFinish = (values: any) => {
-        const data: AuthDto = {
-            login: values.username,
-            password: values.password
-        }
-        dispatch(AuthThunks.login(data))
-
-    };
-
-    const onFinishFailed = (errorInfo: any) => {
-        console.log('Failed:', errorInfo);
-    };
+    const location = useLocation();
 
     return (
-        <Form
-            style={{width: "500px", margin: "50px auto 0"}}
-            name="basic"
-            initialValues={{ remember: true }}
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
-            autoComplete="off"
-        >
-            <Form.Item
-                label="Username"
-                name="username"
-                rules={[{ required: true, message: 'Please input your username!' }]}
-            >
-                <Input />
-            </Form.Item>
-
-            <Form.Item
-                label="Password"
-                name="password"
-                rules={[{ required: true, message: 'Please input your password!' }]}
-            >
-                <Input.Password />
-            </Form.Item>
-
-            <Form.Item name="remember" valuePropName="checked" wrapperCol={{ offset: 8, span: 16 }}>
-                <Checkbox>Remember me</Checkbox>
-            </Form.Item>
-
-            <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                <Button type="primary" htmlType="submit">
-                    Submit
-                </Button>
-            </Form.Item>
-        </Form>
+        <div>
+            {
+                location.pathname == "/login" && <LoginForm/>
+            }
+            {
+                location.pathname == "/register" && <RegisterForm/>
+            }
+        </div>
     );
 };
 
