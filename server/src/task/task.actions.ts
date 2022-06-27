@@ -5,6 +5,8 @@ import GetTasksInput from "./input/get-tasks.input";
 import TasksPaginationQuery from "./query/tasks-pagination.query";
 import TaskListDto from "./dto/task-list.dto";
 import GetByIdParams from "./params/get-by-id.params";
+import UpdateTaskInput from "./input/update-task.input";
+import RemoveTaskInput from "./input/remove-task.input";
 
 /*TODO create auth check*/
 const TaskActions = {
@@ -32,7 +34,6 @@ const TaskActions = {
                 .exec()
 
             return new TaskDto(task)
-
         } catch (e) {
             return {
                 "code": 404,
@@ -45,6 +46,26 @@ const TaskActions = {
         const task = new TaskModel(input)
         await task.save()
         return new TaskDto(task)
+    },
+    update: async (input: UpdateTaskInput) => {
+        try {
+            const update = await TaskModel.findByIdAndUpdate(input._id, input, {returnOriginal: false})
+            return new TaskDto(update)
+        } catch (e) {
+            return {
+                "code": 401
+            }
+        }
+    },
+    remove: async (input: RemoveTaskInput) => {
+        try {
+            await TaskModel.findByIdAndRemove(input._id)
+            return input
+        } catch (e) {
+            return {
+                "code": 401
+            }
+        }
     }
 }
 
