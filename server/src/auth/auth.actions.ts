@@ -9,12 +9,12 @@ const AuthActions = {
     register: async (input: RegisterInput) => {
         const checkUserUsername = await UserModel.findOne({username: input.username}).exec()
         if (checkUserUsername) {
-            return {message: `Username ${input.username} is unavailable`}
+            return {code: 400, message: `Username ${input.username} is unavailable`}
         }
 
         const checkUserEmail = await UserModel.findOne({email: input.email}).exec()
         if (checkUserEmail) {
-            return {message: `User with email ${input.email} is already exists`}
+            return {code: 400, message: `User with email ${input.email} is already exists`}
         }
 
         const hashedPassword = hash(input.password)
@@ -33,7 +33,7 @@ const AuthActions = {
             }
         }
 
-        return {message: "Invalid auth data"}
+        return {code: 400, message: "Invalid auth data"}
     }
 }
 
