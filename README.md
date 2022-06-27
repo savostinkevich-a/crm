@@ -1,10 +1,10 @@
 # CRM
 
 ## SERVER
-___
+
 __yarn dev__ - start development server  
 __yarn seed__ - seed database with users and tasks
-___
+
 ## auth
 
 ### /register
@@ -46,7 +46,7 @@ Error (status code 400)
   "message": "User with email your-email@gmail.com is already exists"
 }
 ```
-___
+
 ### /login
 
 POST
