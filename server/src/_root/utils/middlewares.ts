@@ -16,7 +16,7 @@ export const dbPromise = <INPUT extends unknown = any, PARAMS extends unknown = 
         try {
             const params: DatabaseMiddlewareParams<any, any, any> = {
                 input: request.body,
-                token: request.header("authorization"),
+                token: request.cookies.token,
                 params: request.params,
                 query: request.query,
                 request,

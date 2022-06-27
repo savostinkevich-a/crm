@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
 
 import {Layout} from 'antd';
@@ -7,6 +7,7 @@ import SiteFooter from "./layout/SiteFooter/SiteFooter";
 import AppRouter from "./router/AppRouter";
 
 function App() {
+
     return (
         <Layout>
             <SiteHeader/>

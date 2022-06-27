@@ -7,7 +7,14 @@ const cookieParser = require('cookie-parser')
 const port = 5000;
 
 app.use(cookieParser())
-app.use(cors("*"))
+
+const corsConfig = {
+    origin: true,
+    credentials: true,
+};
+
+app.use(cors(corsConfig));
+app.options('*', cors(corsConfig));
 
 mongoose.connect('mongodb://localhost:27017/crm').catch((error: any) => {console.log(error)} );
 mongoose.Promise = global.Promise;

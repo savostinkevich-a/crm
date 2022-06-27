@@ -1,13 +1,21 @@
 import React from 'react';
-import {Button, Card, Checkbox, Form, Input} from "antd";
+import {Button, Card, Form, Input} from "antd";
 import {Link} from "react-router-dom";
+import AxiosActions from "../../axios/AxiosActions";
 
 const LoginForm = () => {
+
+    const onSubmit = async (authData: any) => {
+        const response = await AxiosActions.login(authData)
+        console.log(response.data)
+    }
+
     return (
         <Card title="Sign in" bordered={false} style={{width: 500, margin: "24px auto"}}>
             <Form
                 labelCol={{ span: 8 }}
                 wrapperCol={{ span: 16 }}
+                onFinish={onSubmit}
             >
                 <Form.Item
                     label="Username"
@@ -22,10 +30,6 @@ const LoginForm = () => {
                     rules={[{ required: true, message: 'Please input your password!' }]}
                 >
                     <Input.Password />
-                </Form.Item>
-
-                <Form.Item name="remember" valuePropName="checked" wrapperCol={{ offset: 8, span: 16 }}>
-                    <Checkbox>Remember me</Checkbox>
                 </Form.Item>
 
                 <Form.Item wrapperCol={{ offset: 8, span: 16 }}>

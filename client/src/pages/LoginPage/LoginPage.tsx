@@ -10,10 +10,10 @@ const LoginPage = () => {
     return (
         <div>
             {
-                location.pathname == "/login" && <LoginForm/>
+                location.pathname === "/login" && <LoginForm/>
             }
             {
-                location.pathname == "/register" && <RegisterForm/>
+                location.pathname === "/register" && <RegisterForm/>
             }
         </div>
     );
