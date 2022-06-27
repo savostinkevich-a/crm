@@ -14,13 +14,13 @@ mongoose.Promise = global.Promise;
 mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 const authRoute = require("./auth/auth.route")
-const userDataRoute = require("./user-data/user-data.route")
 const userRoute = require("./user/user.route")
+const taskRoute = require("./task/task.route")
 
 app.use(express.json())
 app.use("/auth", authRoute)
-app.use("/user-data", userDataRoute)
 app.use("/user", userRoute)
+app.use("/task", taskRoute)
 
 app.listen(port, () => {
     console.log(`⚡️[server]: Server is running at http://localhost:${port}`);

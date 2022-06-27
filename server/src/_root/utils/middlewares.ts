@@ -24,6 +24,10 @@ export const dbPromise = <INPUT extends unknown = any, PARAMS extends unknown = 
             }
             const result = await middleware(params)
             if (result) {
+                if (result.code) {
+                    response.statusCode = result.code
+                    delete(result.code);
+                }
                 response.json(result)
             } else {
                 next()
