@@ -13,7 +13,8 @@ const TaskSchema = new Schema<ITask>({
         required: true
     },
     title: {type: String, required: true},
-    description: {type: String}
+    description: {type: String},
+    deadline: {type: Date}
 })
 
 const TaskModel = model("Task", TaskSchema)

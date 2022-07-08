@@ -19,6 +19,7 @@ const TaskActions = {
 
         const count = await TaskModel.find(input).count()
         const tasks = await TaskModel.find(input)
+            .sort({_id: -1})
             .skip(skip)
             .limit(size)
             .populate("tasking", ["-password", "-__v"])

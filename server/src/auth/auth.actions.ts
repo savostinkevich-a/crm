@@ -44,9 +44,7 @@ const AuthActions = {
         return {code: 400, message: "Invalid auth data"}
     },
     me: async (token: string) => {
-        console.log(token)
         const userJWT = JWTVerify(token)
-        console.log(userJWT)
         if (userJWT) {
             try {
                 const user = await UserModel.findById(userJWT._id).exec()

@@ -6,6 +6,7 @@ interface ITask {
     performer: Types.ObjectId
     title: string
     description?: string
+    deadline?: Date
 }
 
 export default ITask

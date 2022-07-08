@@ -6,4 +6,5 @@ export interface ITask {
     description: string
     performer: IUser
     tasking: IUser
+    deadline?: Date
 }

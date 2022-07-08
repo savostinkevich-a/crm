@@ -7,6 +7,7 @@ class TaskDto implements ITask {
     description?: string;
     performer: Types.ObjectId;
     tasking: Types.ObjectId;
+    deadline?: Date
     title: string;
 
     constructor(task: ITask) {
@@ -14,6 +15,10 @@ class TaskDto implements ITask {
         this.title = task.title
         if (task.description) {
             this.description = task.description
+        }
+
+        if (task.deadline) {
+            this.deadline = task.deadline
         }
 
         this.performer = task.performer

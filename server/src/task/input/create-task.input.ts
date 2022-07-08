@@ -5,6 +5,7 @@ interface CreateTaskInput {
     description?: string
     tasking: Types.ObjectId
     performer: Types.ObjectId
+    deadline?: Date
 }
 
 export default CreateTaskInput

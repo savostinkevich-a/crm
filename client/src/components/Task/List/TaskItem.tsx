@@ -1,7 +1,8 @@
-import {Avatar, Card, List, Space} from 'antd';
+import {Avatar, Card, Divider, List, Space, Typography} from 'antd';
 import React, {FC} from 'react';
 import {ITask} from "../../../models/ITask";
 import {PauseCircleFilled, PlayCircleFilled, RightOutlined} from '@ant-design/icons';
+import moment from "moment";
 
 export interface TaskItemProps {
     item: ITask
@@ -24,24 +25,37 @@ const TaskingComponent: FC<ITask> = ({tasking, performer}) => {
     )
 }
 
+const DeadlineComponent: FC<{deadline: Date}> = ({deadline}) => {
+    const date = moment(deadline).format("MMMM Do YYYY");
+    return (
+        <>
+            <Divider/>
+            <Typography style={{color: "#555555"}}>Deadline: {date}</Typography>
+        </>
+
+    )
+}
+
 const TaskItem: FC<TaskItemProps> = ({item}) => {
     return (
-        <List.Item
-            key={item._id}
-        >
+        <List.Item>
             <Card
                 title={item.title}
                 style={{width: "100%"}}
                 actions={[
-                    <PlayCircleFilled/>,
-                    <PauseCircleFilled/>
+                    <PlayCircleFilled key={1}/>,
+                    <PauseCircleFilled key={2}/>
                 ]}
                 extra={[
-                    <TaskingComponent {...item}/>
+                    <TaskingComponent {...item} key={4}/>
                 ]}
                 hoverable={true}
             >
                <p>{item.description}</p>
+                {
+                    item.deadline && <DeadlineComponent deadline={item.deadline}/>
+                }
+
             </Card>
         </List.Item>
     );

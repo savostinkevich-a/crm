@@ -1,6 +1,8 @@
 import axios, {AxiosResponse} from "axios"
 import {MeResponse, TaskListResponse, UserListResponse} from "./Response";
 import {TaskListParams} from "./params/TaskListParams";
+import {CreateTaskListParams} from "./params/CreateTaskListParams";
+import {ITask} from "../models/ITask";
 
 const AxiosActions = {
     instance: axios.create({
@@ -22,6 +24,9 @@ const AxiosActions = {
     getTaskList: (params: TaskListParams): Promise<AxiosResponse<TaskListResponse>> => {
         let {page, size, ...filter} = params
         return AxiosActions.instance.post(`task?page=${page}&size=${size}`, filter)
+    },
+    createTask: (params: CreateTaskListParams): Promise<AxiosResponse<ITask>> => {
+        return AxiosActions.instance.post(`task/create`, params)
     },
     /*users*/
     getUserList: (): Promise<AxiosResponse<UserListResponse>> => {
