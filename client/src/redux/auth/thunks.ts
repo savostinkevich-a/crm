@@ -5,15 +5,17 @@ import AxiosActions from "../../axios/AxiosActions";
 const AuthThunks = {
     me: () => async (dispatch: AppDispatch) => {
         dispatch(AuthActionCreator.setIsAuthFetching(true))
-        const response = await AxiosActions.me()
-        if (response.status !== 200) {
-            dispatch(AuthActionCreator.setAuthErrors("Error"))
-        } else {
+
+        try {
+            const response = await AxiosActions.me()
             dispatch(AuthActionCreator.setIsAuth(true))
             dispatch(AuthActionCreator.setAuthErrors(""))
             dispatch(AuthActionCreator.setUser(response.data))
+        } catch (e) {
+            dispatch(AuthActionCreator.setAuthErrors("Error"))
+        } finally {
+            dispatch(AuthActionCreator.setIsAuthFetching(false))
         }
-        dispatch(AuthActionCreator.setIsAuthFetching(false))
     }
 }
 

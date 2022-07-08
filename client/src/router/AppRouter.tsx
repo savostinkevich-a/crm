@@ -1,12 +1,13 @@
 import React, {useEffect} from 'react';
 import {Navigate, Route, Routes} from "react-router-dom";
-import HomePage from "../pages/HomePage/HomePage";
+import DashboardPage from "../pages/DashboardPage/DashboardPage";
 import {Layout} from "antd";
 import SideMenu from "../components/SideMenu/SideMenu";
 import LoginPage from "../pages/LoginPage/LoginPage";
 import {useAppSelector} from "../hooks/useAppSelector";
 import {useAppDispatch} from "../hooks/useAppDispatch";
 import AuthThunks from "../redux/auth/thunks";
+import ChatPage from "../pages/ChatPage/ChatPage";
 
 const AppRouter = () => {
 
@@ -16,7 +17,7 @@ const AppRouter = () => {
     const dispatch = useAppDispatch()
     useEffect(() => {
         dispatch(AuthThunks.me())
-    }, [])
+    }, [dispatch])
 
     if (isFetching) {
         return <></>
@@ -30,8 +31,9 @@ const AppRouter = () => {
                             <SideMenu/>
                         </Layout.Sider>
                         <Routes>
-                            <Route path="/" element={<HomePage />}/>
-                            <Route path="/home" element={<HomePage />}/>
+                            <Route path="/dashboard" element={<DashboardPage />}/>
+                            <Route path="/chat" element={<ChatPage />}/>
+                            <Route path="/" element={<DashboardPage />}/>
                             <Route path="*" element={<Navigate to={"/"}/>}/>
                         </Routes>
                     </>
